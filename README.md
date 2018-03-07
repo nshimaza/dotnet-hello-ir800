@@ -80,3 +80,35 @@ $ ioxclient docker package dotnet-ir800 .
 ```
 
 You will get `packaget.tar` which is IOx application package installable to IR809 or IR829.
+
+## Verify the app
+
+Install the IOx app to IR8x9, activate then start.
+
+When the app is started, `loop.sh` is called.  This sample app doesn't
+start .NET Hello World because it cannot keep the app container running.
+Like Docker container, IOx app container stops when its first process
+terminated.  If we started Hello World as the first app process, it shows
+Hello World message then immediately finishes.  As a result of this,
+the entire app container stops immediately so we cannot verify if
+the Hello World is really working.
+
+So we starts a small dummy process which only keeps running so that we can
+keep the app container running until we stop it intentionally.
+The `loop.sh` does this.
+
+While IOx app is running, we can access to console of the container
+using `ioxclient` tool with following command.
+
+```shell-session
+$ ioxclient application console <app-ID>
+```
+Once you get shell prompt inside of the app container, run `dotnet` command
+to execute the Hello World.
+
+```shell-session
+# dotnet /hello/hello.dll
+Hello World!
+```
+
+You will see "Hello World!" on the console.
