@@ -100,6 +100,10 @@ The `loop.sh` does this.
 While IOx app is running, we can access to console of the container
 using `ioxclient` tool with following command.
 
+NOTE: Before you access to the app console, make sure your `ioxclient` has
+correct profile created for your IR8x9.  Use `ioxclient profile create` command
+to create new profile.  Use port number 22 for SSH instead of default 2222.
+
 ```shell-session
 $ ioxclient application console <app-ID>
 ```
